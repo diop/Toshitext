@@ -1,2 +1,2 @@
 ## Firebolt
-This web app powers the Firebolt Bitcoin Lightning Dapp.
+This web API powers the Firebolt crypto service.
