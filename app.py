@@ -32,7 +32,7 @@ url = 'https://api.blockcypher.com/v1/bcy/test/txs/micro'
 
 @app.route('/')
 def main():
-    return 'Firebolt - Send bitcoin faster and cheaper with a text message.'
+    return 'Firebolt - Send bitcoin faster and cheaper with a text message --> 💰🚀'
 
 @app.route('/sms', methods=['GET', 'POST'])
 def inbound_sms():
