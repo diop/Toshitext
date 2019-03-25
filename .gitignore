@@ -113,5 +113,3 @@ venv.bak/
 dmypy.json
 
 # Pyre type checker
-
-client_secret.json
