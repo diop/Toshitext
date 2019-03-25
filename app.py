@@ -31,7 +31,7 @@ params = {'token': os.environ.get('TOKEN')}
 url = 'https://api.blockcypher.com/v1/bcy/test/txs/micro'
 
 @app.route('/')
-def index():
+def main():
     return 'Firebolt - Send bitcoin faster and cheaper with a text message.'
 
 @app.route('/sms', methods=['GET', 'POST'])
