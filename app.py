@@ -58,7 +58,6 @@ def inbound_sms():
     print('address --> ', recipient)
     
     privkey = sheet.cell(2,1).value
-    print('from_privkey --> ', privkey)
 
     data = {'from_private': privkey, 'to_address': recipient, 'value_satoshis': amount}
 
