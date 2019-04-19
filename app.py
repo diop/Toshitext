@@ -41,20 +41,24 @@ def inbound_sms():
     print(from_number)
 
     # The content of the text message
-    body = request.form['Body']
-    print(body)
+    message = request.form['Body']
+    print(message)
 
     # Parse the text message for invidual commands
-    commands = body.split()
-    print(commands)
+    parsed_message = message.split()
+    print(parsed_message)
+
+    # Grab the command which is the second item in the properly formatted message
+    command = parsed_message[0]
+    print('command --> ', command)
 
     # Grab the amount which is the second item in the properly formatted message
-    amount = commands[1]
+    amount = parsed_message[1]
     print('amount --> ', amount)
     
     # Grab the recipient wallet address which is the third item 
     # in the properly formatted message
-    recipient = commands[2]
+    recipient = parsed_message[2]
     print('address --> ', recipient)
     
     privkey = sheet.cell(2,1).value
