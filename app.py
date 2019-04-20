@@ -26,7 +26,8 @@ google_client = gspread.authorize(creds)
 sheet = google_client.open('Toshitext').sheet1
 phone_numbers = sheet.col_values(5)
 
-commands = []
+commands = ['help', 'send', 'balance', 'receive', 'clear', 'cancel']
+
 params = {'token': os.environ.get('TOKEN')}
 url = 'https://api.blockcypher.com/v1/bcy/test/txs/micro'
 
@@ -36,6 +37,8 @@ def main():
 
 @app.route('/sms', methods=['GET', 'POST'])
 def inbound_sms():
+    response = MessagingResponse()
+    help_message = 'Help menu: help options...'
     # The phone number sending the Twilio message
     from_number = request.form['From']
     print(from_number)
@@ -48,28 +51,38 @@ def inbound_sms():
     parsed_message = message.split()
     print(parsed_message)
 
-    # Grab the command which is the second item in the properly formatted message
-    command = parsed_message[0]
-    print('command --> ', command)
+    # Grab the command which is the first item 
+    # in the properly formatted message
+    # command = parsed_message[0].lower()
+    # print('command --> ', command)
 
-    # Grab the amount which is the second item in the properly formatted message
-    amount = parsed_message[1]
-    print('amount --> ', amount)
+    # Grab the amount which is the second item 
+    # in the properly formatted message
     
     # Grab the recipient wallet address which is the third item 
     # in the properly formatted message
-    recipient = parsed_message[2]
-    print('address --> ', recipient)
     
-    privkey = sheet.cell(2,1).value
+    if len(parsed_message) == 1:
+        command = parsed_message[0].lower()
+        if command == 'menu':
+            response.message(help_message)
+    elif len(parsed_message) == 3:
+        privkey = sheet.cell(2,1).value
 
-    data = {'from_private': privkey, 'to_address': recipient, 'value_satoshis': amount}
+        amount = parsed_message[1]
+        print('amount --> ', amount)
 
-    r = requests.post(url, data=data, params=params)
-    print(r.json())
+        recipient = parsed_message[2]
+        print('address --> ', recipient)
 
-    response = MessagingResponse()
-    response.message('Thanks for texting! If your phone number is registered in our system, your request will be fulfilled.')
+        data = {'from_private': privkey, 'to_address': recipient, 'value_satoshis': amount}
+
+        r = requests.post(url, data=data, params=params)
+        print(r.json())
+
+        response.message('Thanks for texting! If your phone number is registered in our system, your request will be fulfilled.')
+    else:
+        response.message('Your message is malformed')
 
     return str(response)
     
