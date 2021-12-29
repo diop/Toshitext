@@ -1,5 +1,8 @@
 ## Toshitext
-Send Bitcoin with an SMS.
+Send bitcoin via SMS the naive way with Twilio, Blockcypher, Flask and Google Sheets
+
+## Please Do Not Use In Production
+This is just a proof of concept.
 
 ## Technologies
 + Bitcoin 
