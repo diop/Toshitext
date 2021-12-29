@@ -1,9 +1,8 @@
-## Firebolt
-This web API powers the Firebolt crypto service. Send Bitcoin faster and cheaper with SMS.
+## Toshitext
+Send Bitcoin with an SMS.
 
 ## Technologies
 + Bitcoin 
-+ Bitcoin Lightning
 + Twilio
 + Blockcypher API
 + Blockcypher Block Explorer
@@ -14,3 +13,5 @@ This web API powers the Firebolt crypto service. Send Bitcoin faster and cheaper
 + Google Secrets Management
 + Python Flask
 + Coinbase API
+
+## TODO / Instructions
